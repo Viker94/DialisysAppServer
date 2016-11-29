@@ -14,6 +14,7 @@ import pl.edu.utp.Repository.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -75,18 +76,51 @@ public class UserController {
         userRepository.delete(id);
     }
 
+    @RequestMapping("/users")
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
+    @RequestMapping("/userEdit/{id}/{firstName}/{lastName}/{login}/{passwd}")
+    public void userEdit(@PathVariable("id") Long id, @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName, @PathVariable("login") String login, @PathVariable("passwd") String passwd){
+        User user = userRepository.findOne(id);
+        Login l = user.getLogin();
+        l.setLogin(login);
+        l.setPasswd(passwd);
+        loginRepository.save(l);
+        user.setLogin(l);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepository.save(user);
+    }
+
     @PostConstruct
     public void addUserAuto(){
         Login login = new Login(null, "login", "passwd");
         loginRepository.save(login);
         ArrayList<Consumption> consumed = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(0);
+        cal.set(2016, 11, 28);
         consumed.add(new Consumption(null, productRepository.findOne(new Long(1)), new Date(), 1));
         consumed.add(new Consumption(null, productRepository.findOne(new Long(6)), new Date(), 4));
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(7)), cal.getTime(), 1));
+        cal.set(2016, 11, 27);
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(6)), cal.getTime(), 2));
+        cal.set(2016, 11, 26);
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(5)), cal.getTime(), 3));
+        cal.set(2016, 11, 25);
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(4)), cal.getTime(), 4));
+        cal.set(2016, 11, 24);
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(3)), cal.getTime(), 5));
+        cal.set(2016, 11, 23);
+        consumed.add(new Consumption(null, productRepository.findOne(new Long(2)), cal.getTime(), 6));
         consumptionRepository.save(consumed);
         User user = new User(null, "Jan", "Kowalski",10,12,30, 100, 100, 100, login, consumed);
         userRepository.save(user);
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
         nurseRepository.save(new Nurse(null, "Paweł", "Szwed", "pafcio", "sfecio",true, users));
+        nurseRepository.save(new Nurse(null, "Piguła2", "Piguła2", "loginPiguła", "asd", false, null));
     }
 }

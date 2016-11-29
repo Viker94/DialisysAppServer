@@ -4,6 +4,8 @@ USER:
 /consumption/{userID}/{productID}/{amount} - dodaje spozycia
 /userAdd/{login}/{passwd}/{firstName}/{lastName} - dodaje usera
 /userDel/{id} - usuniecie usera
+/users - wszyscy userzy
+/userEdit/{id}/{firstName}/{lastName}/{login}/{passwd} - edycja usera
 PRODUCTS:
 /products - wszystkie produkty
 NURSE:

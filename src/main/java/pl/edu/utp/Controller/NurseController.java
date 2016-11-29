@@ -1,5 +1,6 @@
 package pl.edu.utp.Controller;
 
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +60,17 @@ public class NurseController {
     }
 
     @RequestMapping("/nurseNumPatients/{id}")
-    public Integer nurseNumPatients(@PathVariable("id") Long id){
+    public JSONObject nurseNumPatients(@PathVariable("id") Long id){
         List<User> patients = nurseRepository.findOne(id).getPatients();
-        if(patients == null) return 0;
-        else return patients.size();
+        JSONObject json = new JSONObject();
+        if(patients == null){
+            json.put("size", 0);
+            return json;
+        }
+        else {
+            json.put("size", patients.size());
+            return json;
+        }
     }
 
     @RequestMapping("/nurseEdit/{id}/{firstName}/{lastName}/{login}/{passwd}")
