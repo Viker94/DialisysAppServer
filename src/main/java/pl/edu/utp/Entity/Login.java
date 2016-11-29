@@ -24,5 +24,4 @@ public class Login {
     private Long id;
     private String login;
     private String passwd;
-    private int type;
 }

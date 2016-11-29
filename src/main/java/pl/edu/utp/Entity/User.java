@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
+@Entity(name = "USER_TABLE")
 public class User {
 
     @Id
@@ -30,4 +31,6 @@ public class User {
     private double limitSodium;
     @OneToOne
     private Login login;
+    @OneToMany
+    private List<Consumption> consumed;
 }

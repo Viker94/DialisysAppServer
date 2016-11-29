@@ -23,4 +23,5 @@ public class Consumption {
     @OneToOne
     private Product product;
     private Date date;
+    private Integer amount;
 }

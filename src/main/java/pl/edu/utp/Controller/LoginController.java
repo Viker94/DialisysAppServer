@@ -36,6 +36,6 @@ public class LoginController {
 
     //@PostConstruct
     public void addLogin(){
-        loginRepository.save(new Login(null, "login", "passwd", 1));
+        loginRepository.save(new Login(null, "login", "passwd"));
     }
 }

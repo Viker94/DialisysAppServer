@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE User u SET u.limitPotassium = ?1, u.limitWater = ?2, u.limitSodium = ?3 WHERE id = ?4")
+    @Query("UPDATE USER_TABLE u SET u.limitPotassium = ?1, u.limitWater = ?2, u.limitSodium = ?3 WHERE id = ?4")
     void updateLimits(double pot, double water, double sodium, Long id);
 }

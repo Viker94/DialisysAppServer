@@ -29,7 +29,7 @@ public class ProductController {
         return productRepository.findAll();
     }
 
-    //@PostConstruct
+    @PostConstruct
     public void addProducts(){
         Product p1 = new Product(null, "Banan", 4.0, 5.0, 3.2, Category.FRUIT);
         Product p2 = new Product(null, "Japko", 2.3, 1.1, 2.2, Category.FRUIT);
