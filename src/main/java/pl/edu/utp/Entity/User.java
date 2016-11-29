@@ -31,6 +31,6 @@ public class User {
     private double limitSodium;
     @OneToOne
     private Login login;
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     private List<Consumption> consumed;
 }

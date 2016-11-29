@@ -1,0 +1,22 @@
+USER:
+/user/{login} - znajduje usera po loginID
+/user/{id}/{pot}/{water}/{sodium} - zmienia limity dla usera
+/consumption/{userID}/{productID}/{amount} - dodaje spozycia
+/userAdd/{login}/{passwd}/{firstName}/{lastName} - dodaje usera
+/userDel/{id} - usuniecie usera
+PRODUCTS:
+/products - wszystkie produkty
+NURSE:
+/nurseLogin/{login}/{passwd} - znalezienie piguly po loginie i hasle
+/nurse/{firstName}/{lastName}/{login}/{passwd} - dodanie piguly
+/nurse - wszystkie piguly
+/nursePatients/{nurseID}/{userID} - dodanie usera do piguly
+/nurseEdit/{id}/{firstName}/{lastName}/{login}/{passwd} - edycja piguly
+/nurseDel/{id} - usuniecie piguly
+/nurseNumPatients/{id} - ilosc pacjentow od piguly (zwraca tylko liczbe, nie jsona)
+/nurseDelPatients/{id} - usuwa pacjentow od piguly
+LOGIN:
+/login - wszystkie loginy (tylko do testow)
+/login/{login}/{passwd} - znalezienie loginu i hasla
+CONSUMPTION:
+/consumption - wszystkie spozycia (tylko do testow)
