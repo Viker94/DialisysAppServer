@@ -42,7 +42,8 @@ public class NurseController {
     public List<Nurse> findAll(){
         return nurseRepository.findAll();
     }
-    @RequestMapping("/nursePatients/{nurseID}/{userID}")
+
+    @RequestMapping("/nurseAddPatient/{nurseID}/{userID}")
     public void updatePatients(@PathVariable("nurseID") Long nurseID, @PathVariable("userID") Long userID){
         Nurse nurse = nurseRepository.getOne(nurseID);
         List<User> patients = nurse.getPatients();
@@ -82,10 +83,26 @@ public class NurseController {
         nurse.setPassword(passwd);
         nurseRepository.save(nurse);
     }
+
     @RequestMapping("/nurseDelPatients/{id}")
     public void nurseDelPatients(@PathVariable("id") Long id){
         Nurse nurse = nurseRepository.findOne(id);
         nurse.setPatients(new ArrayList<>());
+        nurseRepository.save(nurse);
+    }
+
+    @RequestMapping("/nursePatients/{id}")
+    public List<User> nursePatients(@PathVariable("id") Long id){
+        return nurseRepository.findOne(id).getPatients();
+    }
+
+    @RequestMapping("/nurseDelOnePatient/{nurseID}/{userID}")
+    public void delOnePatient(@PathVariable("nurseID") Long nurseID, @PathVariable("userID") Long userID){
+        Nurse nurse = nurseRepository.findOne(nurseID);
+        List<User> patients = nurse.getPatients();
+        User user = userRepository.findOne(userID);
+        patients.removeIf(p -> p.equals(user));
+        nurse.setPatients(patients);
         nurseRepository.save(nurse);
     }
 }

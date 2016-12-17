@@ -12,11 +12,13 @@ NURSE:
 /nurseLogin/{login}/{passwd} - znalezienie piguly po loginie i hasle
 /nurse/{firstName}/{lastName}/{login}/{passwd} - dodanie piguly
 /nurse - wszystkie piguly
-/nursePatients/{nurseID}/{userID} - dodanie usera do piguly
+/nurseAddPatient/{nurseID}/{userID} - dodanie usera do piguly
 /nurseEdit/{id}/{firstName}/{lastName}/{login}/{passwd} - edycja piguly
 /nurseDel/{id} - usuniecie piguly
 /nurseNumPatients/{id} - ilosc pacjentow od piguly (zwraca tylko liczbe, nie jsona)
 /nurseDelPatients/{id} - usuwa pacjentow od piguly
+/nurseDelOnePatient/{nurseID}/{userID} - usuwa danego pacjenta od danej piguly
+/nursePatients/{id} - zwraca pacjentow piguly
 LOGIN:
 /login - wszystkie loginy (tylko do testow)
 /login/{login}/{passwd} - znalezienie loginu i hasla
