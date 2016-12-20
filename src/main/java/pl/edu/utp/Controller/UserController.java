@@ -68,7 +68,7 @@ public class UserController {
     public void addUser(@PathVariable("login") String login, @PathVariable("passwd") String passwd, @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName){
         Login l = new Login(null, login, passwd);
         loginRepository.save(l);
-        userRepository.save(new User(null, firstName, lastName, 0, 0, 0, 1, 1, 1, l, null));
+        userRepository.save(new User(null, firstName, lastName, 0, 0, 0, 1, 1, 1,null, l, null));
     }
 
     @RequestMapping("/userDel/{id}")
@@ -94,6 +94,38 @@ public class UserController {
         userRepository.save(user);
     }
 
+    @RequestMapping("/userSubs/{id}/{potassium}/{water}/{sodium}")
+    public void userSubs(@PathVariable("id") Long id, @PathVariable("potassium") double potassium, @PathVariable("water") double water, @PathVariable("sodium") double sodium){
+        User user = userRepository.findOne(id);
+        user.setPotassium(potassium);
+        user.setWater(water);
+        user.setSodium(sodium);
+        userRepository.save(user);
+    }
+
+    @RequestMapping("/userWater/{id}/{water}")
+    public void userWater(@PathVariable("id") Long id, @PathVariable("water") double water){
+        User user = userRepository.findOne(id);
+        user.setWater(water);
+        userRepository.save(user);
+    }
+
+    @RequestMapping("/userReset/{id}")
+    public void userReset(@PathVariable("id") Long id){
+        User user = userRepository.findOne(id);
+        user.setPotassium(0);
+        user.setWater(0);
+        user.setSodium(0);
+        userRepository.save(user);
+    }
+
+    @RequestMapping("/userVisit/{id}/{date}")
+    public void userVisit(@PathVariable("id") Long id, @PathVariable("date") Date date){
+        User user = userRepository.findOne(id);
+        user.setNextVisit(date);
+        userRepository.save(user);
+    }
+
     @PostConstruct
     public void addUserAuto(){
         Login login = new Login(null, "login", "passwd");
@@ -116,7 +148,8 @@ public class UserController {
         cal.set(2016, 11, 11);
         consumed.add(new Consumption(null, productRepository.findOne(new Long(2)), cal.getTime(), 6));
         consumptionRepository.save(consumed);
-        User user = new User(null, "Jan", "Kowalski",10,12,30, 100, 100, 100, login, consumed);
+        cal.set(2016, 11, 30);
+        User user = new User(null, "Jan", "Kowalski",10,12,30, 100, 100, 100,cal.getTime(), login, consumed);
         userRepository.save(user);
         ArrayList<User> users = new ArrayList<>();
         users.add(user);

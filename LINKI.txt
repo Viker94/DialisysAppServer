@@ -6,6 +6,10 @@ USER:
 /userDel/{id} - usuniecie usera
 /users - wszyscy userzy
 /userEdit/{id}/{firstName}/{lastName}/{login}/{passwd} - edycja usera
+/userReset/{id} - resetowanie substancji usera
+/userWater/{id}/{water} - ustawianie ilosciwody usera
+/userSubs/{id}/{potassium}/{water}/{sodium} - ustawianie ilosci substancji usera
+/userVisit/{id}/{date} - ustawia wizyte dla usera
 PRODUCTS:
 /products - wszystkie produkty
 NURSE:

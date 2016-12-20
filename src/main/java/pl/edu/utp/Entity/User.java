@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class User {
     private double limitPotassium;
     private double limitWater;
     private double limitSodium;
+    private Date nextVisit;
     @OneToOne
     private Login login;
     @OneToMany(orphanRemoval = true)
