@@ -3,6 +3,7 @@ package pl.edu.utp.Controller;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -120,7 +121,7 @@ public class UserController {
     }
 
     @RequestMapping("/userVisit/{id}/{date}")
-    public void userVisit(@PathVariable("id") Long id, @PathVariable("date") Date date){
+    public void userVisit(@PathVariable("id") Long id, @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
         User user = userRepository.findOne(id);
         user.setNextVisit(date);
         userRepository.save(user);
